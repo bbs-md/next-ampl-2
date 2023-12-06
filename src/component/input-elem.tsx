@@ -1,5 +1,7 @@
 'use client'
 import React, {useState} from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
+import { saveDataToS3, sendCvDataByGrapgQl } from '@/app/actions'
 
 export default function InputElem(props: any) {
     console.log('InputElem props >>>>', props)
@@ -30,15 +32,50 @@ export default function InputElem(props: any) {
                 body: data
             })
 
-            if (!res.ok) throw new Error(await res.text())
+            console.log('Save file ', res)
+
+            if (!res.ok) {
+                setMessage(`Failed to upload data`)
+                throw new Error(await res.text())
+            }           
+
+            const uploadResponseDict = await res.json();
+            const filePath: string = uploadResponseDict.body.filePath;
+            console.log(`The [${filePath}] file was saved`)
+            const saveDataToS3Response = await saveDataToS3(filePath);
+            console.log('fileNameData ', saveDataToS3Response);
+            const key = saveDataToS3Response[0];
+            const bucket = saveDataToS3Response[1];
+            if (key && bucket) {
+                console.log(`The [${filePath}] file was saved to [${bucket}] s3 bucket`);
+                let cvDataDict: {} = {name: name}
+                const sendCvDataByGrapgQlResponse = await sendCvDataByGrapgQl(filePath, cvDataDict)
+                console.log('sendCvDataByGrapgQlResponse ', sendCvDataByGrapgQlResponse)
+                const responseFileName = sendCvDataByGrapgQlResponse['fileName'];
+                if (responseFileName) {
+                    setMessage(`Data and the [${file.name}] file were uploaded`)
+                }
+            }
             else {
-                setMessage(`The file ${file.name} was uploaded`)
-        }
+                setMessage(`Data and the [${file.name}] file were uploaded, an error occurred during processing`)
+            }
+            
+            //const saveDataToS3ResponseDict = await saveDataToS3Response.json();
         } catch (e: any) {
             setMessage(`Failed to sent data: ${e}`)
             console.error("Failed to sent data", e)    
         }
     }
+
+    function SubmitButton() {
+        const { pending } = useFormStatus()
+       
+        return (
+          <button type="submit" aria-disabled={pending}>
+            Add
+          </button>
+        )
+      }
 
 
   return (

@@ -9,6 +9,7 @@ import { myCustomQuery } from "@/graphql/queries";
 import { myCustomMutation } from "@/graphql/mutations";
 import { uploadData } from 'aws-amplify/storage';
 
+
 Amplify.configure(config);
 
  Amplify.configure({
@@ -39,18 +40,21 @@ export async function POST(request: NextRequest) {
 
     console.log(`open ${path} to see uploaded file`)
 
-    const params = {
-        Bucket: 'hr-ses-mail-received-tol',
-        Key: file.name,
-        Body: buffer,
-    };
-    console.log(params);
+    // const params = {
+    //     Bucket: 'hr-ses-mail-received-tol',
+    //     Key: file.name,
+    //     Body: buffer,
+    // };
+    // console.log(params);
 
     //const s3 = new S3({
         // accessKeyId: 'key-id-goes-here',
         // secretAccessKey: 'secret-access-key-goes-here',
         //region: 'eu-west-1',
     //});
+
+
+    return NextResponse.json( {success: true, body: {filePath: path}})
 
      try {
          const result = await uploadData({

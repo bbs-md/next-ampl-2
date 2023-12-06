@@ -50,10 +50,11 @@ export default async function Home() {
   return (
     <div
       style={{
-        maxWidth: '500px',
+        maxWidth: '800px',
         margin: '0 auto',
         textAlign: 'center',
-        marginTop: '100px'
+        marginTop: '100px',
+        height: '200px',
       }}
     >
       {/* 3. Update the form's action to use the
