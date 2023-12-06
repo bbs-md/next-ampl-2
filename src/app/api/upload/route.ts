@@ -7,19 +7,19 @@ import { generateClient } from 'aws-amplify/api';
 import config from '@/amplifyconfiguration.json';
 import { myCustomQuery } from "@/graphql/queries";
 import { myCustomMutation } from "@/graphql/mutations";
-//import { uploadData } from 'aws-amplify/storage';
+import { uploadData } from 'aws-amplify/storage';
 
 Amplify.configure(config);
 
-// Amplify.configure({
-//     ...Amplify.getConfig(),
-//     Storage: {
-//         S3: {
-//             region: 'eu-west-1', // (required) - Amazon S3 bucket region
-//             bucket: 'hr-ses-mail-received-tol' // (required) - Amazon S3 bucket URI
-//         }
-//     }
-//   });
+ Amplify.configure({
+     ...Amplify.getConfig(),
+     Storage: {
+         S3: {
+             region: 'eu-west-1', // (required) - Amazon S3 bucket region
+             bucket: 'hr-ses-mail-received-tol' // (required) - Amazon S3 bucket URI
+         }
+     }
+   });
 const client = generateClient();
 
 const bucketName = 'hr-ses-mail-received-tol';
@@ -52,16 +52,15 @@ export async function POST(request: NextRequest) {
         //region: 'eu-west-1',
     //});
 
-    // try {
-    //     const result = await uploadData({
-    //         key: file.name,
-    //         data: buffer,
-    //     }).result;
-    //     console.log('Succeeded uploadData: ', result);
-      
-    //   } catch (error) {
-    //         console.log('uploadData Error : ', error);
-    //   }
+     try {
+         const result = await uploadData({
+             key: file.name,
+             data: buffer,
+         }).result;
+         console.log('Succeeded uploadData: ', result);
+    } catch (error) {
+        console.log('uploadData Error : ', error);
+    }
 
     // try {
     //     const upload = s3.upload(params);
@@ -73,15 +72,15 @@ export async function POST(request: NextRequest) {
     //     await upload.promise();
     //     console.log(`s3 File uploaded successfully: ${file.name}`);
 
-    //     const apiData = await client.graphql({ query: myCustomMutation, variables: { 
-    //         cvData: {
-    //           bucketName: bucketName,
-    //           objectKey: file.name,
-    //           source: "alliedtesting.com",
-    //           name: name
-    //         }
-    //       }});
-    //     console.log('graphql apiData >>> ', apiData)
+         const apiData = await client.graphql({ query: myCustomMutation, variables: { 
+             cvData: {
+               bucketName: bucketName,
+               objectKey: file.name,
+               source: "alliedtesting.com",
+               name: name
+             }
+           }});
+         console.log('graphql apiData >>> ', apiData)
 
     // } catch (err) {
     //     console.error('s3 Failed to upload file to s3: ', err);

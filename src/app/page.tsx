@@ -7,6 +7,7 @@ import InputElem from '@/component/input-elem'
 
 import config from '@/amplifyconfiguration.json';
 
+/*
 const cookiesClient = generateServerClientUsingCookies({
   config,
   cookies
@@ -30,10 +31,10 @@ async function createTodo(formData: FormData) {
   console.log("Created Todo: ", data )
 
 }
-
+*/
 export default async function Home() {
   const cvData = {bucketName: "bucketName-XXX-XXX", objectKey: "objectKey-YYY-YYYY", source: "alliedtesting.com", name: "test name"}
-  const { data, errors } = await cookiesClient.graphql({
+  /*const { data, errors } = await cookiesClient.graphql({
     query: queries.myCustomQuery, variables: {cvData}
   });
   console.log('cookiesClient >>>> data', data)
@@ -45,7 +46,7 @@ export default async function Home() {
     console.log('cookiesClient >>>> data', data)
 
   }
-
+*/
   return (
     <div
       style={{
