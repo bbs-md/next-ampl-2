@@ -1,95 +1,68 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
+import { cookies } from 'next/headers';
+// 1. Add the following two imports
+import { revalidatePath } from 'next/cache';
+import * as queries from '@/graphql/queries';
+import InputElem from '@/component/input-elem'
 
-export default function Home() {
+import config from '@/amplifyconfiguration.json';
+
+const cookiesClient = generateServerClientUsingCookies({
+  config,
+  cookies
+});
+
+// 2. Create a new Server Action
+async function createTodo(formData: FormData) {
+  "use server"
+  const { data } = await cookiesClient.graphql({
+    query: queries.myCustomQuery,
+    variables: {
+      cvData: {
+        bucketName: 'bucketName',
+        objectKey: 'file.name',
+        source: "alliedtesting.com",
+        name: 'name'
+      }            
+    }
+  });
+
+  console.log("Created Todo: ", data )
+
+}
+
+export default async function Home() {
+  const cvData = {bucketName: "bucketName-XXX-XXX", objectKey: "objectKey-YYY-YYYY", source: "alliedtesting.com", name: "test name"}
+  const { data, errors } = await cookiesClient.graphql({
+    query: queries.myCustomQuery, variables: {cvData}
+  });
+  console.log('cookiesClient >>>> data', data)
+
+  const myClick = async () => {
+    const { data, errors } = await cookiesClient.graphql({
+      query: queries.myCustomQuery, variables: {cvData}
+    });
+    console.log('cookiesClient >>>> data', data)
+
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <div
+      style={{
+        maxWidth: '500px',
+        margin: '0 auto',
+        textAlign: 'center',
+        marginTop: '100px'
+      }}
+    >
+      {/* 3. Update the form's action to use the
+          new create Todo Server Action*/}
+      
+      {/* <form action={createTodo}> */}
+        {/* <input name="name" placeholder="Add a todo" />
+        <button type="submit">Add</button> */}
+        <InputElem tol={'tol'}>Input el</InputElem>
+      {/* </form> */}
+    </div>
+  );
 }

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "nextampl2",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7,
+      "apiKeyExpirationDate": "2023-12-13T00:22:01.549Z",
+      "keyDescription": "API for graphQL"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}
