@@ -68,6 +68,30 @@
           "resourceName": "nampltollambda2"
         }
       ]
+    },
+    "AMPLIFY_storage_nextampl27f49c0ed_bucketName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "nextampl27f49c0ed"
+        }
+      ]
+    },
+    "AMPLIFY_storage_nextampl27f49c0ed_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "nextampl27f49c0ed"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "nextampl27f49c0ed": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "serviceType": "imported"
     }
   }
 }

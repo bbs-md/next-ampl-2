@@ -24,5 +24,7 @@
   },
   "aws_cognito_verification_mechanisms": [
     "EMAIL"
-  ]
+  ],
+  "aws_user_files_s3_bucket": "hr-ses-mail-received-tol",
+  "aws_user_files_s3_bucket_region": "eu-west-1"
 }
