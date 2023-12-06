@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import * as queries from '@/graphql/queries';
 import InputElem from '@/component/input-elem'
 
-import config from '../amplifyconfiguration.json';
+import config from '@/amplifyconfiguration.json';
 
 const cookiesClient = generateServerClientUsingCookies({
   config,

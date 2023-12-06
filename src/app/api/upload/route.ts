@@ -4,7 +4,7 @@ import { join } from 'path'
 //import { S3} from 'aws-sdk'
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
-import config from '../../../amplifyconfiguration.json';
+import config from '@/amplifyconfiguration.json';
 import { myCustomQuery } from "@/graphql/queries";
 import { myCustomMutation } from "@/graphql/mutations";
 //import { uploadData } from 'aws-amplify/storage';
