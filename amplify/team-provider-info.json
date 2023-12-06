@@ -18,7 +18,7 @@
       "function": {
         "nampltollambda2": {
           "deploymentBucketName": "amplify-amplifydbdee3ad72154-staging-232925-deployment",
-          "s3Key": "amplify-builds/nampltollambda2-7677597461733266332b-build.zip"
+          "s3Key": "amplify-builds/nampltollambda2-52632b424a714c537534-build.zip"
         }
       },
       "auth": {

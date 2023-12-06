@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
          const apiData = await client.graphql({ query: myCustomMutation, variables: { 
              cvData: {
                bucketName: bucketName,
-               objectKey: file.name,
+               objectKey: `public/${file.name}`,
                source: "alliedtesting.com",
                name: name
              }

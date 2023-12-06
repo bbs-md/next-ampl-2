@@ -48,42 +48,9 @@
   "function": {
     "nampltollambda2": {
       "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_nampltollambda2_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "nampltollambda2"
-        }
-      ]
-    },
-    "AMPLIFY_function_nampltollambda2_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "nampltollambda2"
-        }
-      ]
-    },
-    "AMPLIFY_storage_nextampl27f49c0ed_bucketName": {
-      "usedBy": [
-        {
-          "category": "storage",
-          "resourceName": "nextampl27f49c0ed"
-        }
-      ]
-    },
-    "AMPLIFY_storage_nextampl27f49c0ed_region": {
-      "usedBy": [
-        {
-          "category": "storage",
-          "resourceName": "nextampl27f49c0ed"
-        }
-      ]
     }
   },
   "storage": {
