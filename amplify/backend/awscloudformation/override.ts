@@ -26,7 +26,7 @@ export function override(resources: AmplifyRootStackTemplate, amplifyProjectInfo
                         "Action": [
                             "appsync:GraphQL"
                         ],
-                        "Resource": "arn:aws:appsync:eu-west-1:074168154675:apis/34wd5glo3ja63iriro5ljqo4mu"
+                        "Resource": "arn:aws:appsync:eu-west-1:074168154675:apis/34wd5glo3ja63i*"
                     }
                 ],
             },
