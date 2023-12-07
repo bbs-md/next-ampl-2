@@ -34,16 +34,16 @@ export default function InputElem(props: any) {
                 data.set('name', name?.toString())
             }
 
-            const apiData = await client.graphql({ query: myCustomMutation, variables: { 
-                cvData: {
-                  bucketName: "bucketName",
-                  objectKey: `public/fileName`,
-                  source: "alliedtesting.com",
-                  name: "cvData.name"
-                }
-              },
-              });
-            console.log('graphql apiData >>> ', apiData)
+            // const apiData = await client.graphql({ query: myCustomMutation, variables: { 
+            //     cvData: {
+            //       bucketName: "bucketName",
+            //       objectKey: `public/fileName`,
+            //       source: "alliedtesting.com",
+            //       name: "cvData.name"
+            //     }
+            //   },
+            //   });
+            // console.log('graphql apiData >>> ', apiData)
             
 
             const res = await fetch('/api/upload', {
