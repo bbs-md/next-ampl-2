@@ -1,12 +1,13 @@
 'use server'
 
-import { uploadData } from 'aws-amplify/storage';
-import { Amplify } from 'aws-amplify';
-import config from '@/amplifyconfiguration.json';
+
 import { readFile } from "fs/promises";
 import { generateClient } from 'aws-amplify/api';
 import { myCustomMutation } from "@/graphql/mutations";
 
+import { uploadData } from 'aws-amplify/storage';
+import { Amplify } from 'aws-amplify';
+import config from '@/amplifyconfiguration.json';
 Amplify.configure(config);
 const client = generateClient();
 
@@ -38,8 +39,10 @@ export async function sendCvDataByGrapgQl(filePath: string, cvData: {[key:string
                       source: "alliedtesting.com",
                       name: cvData.name
                     }
-                  }});
+                  },
+                  authMode: 'iam'});
                 console.log('graphql apiData >>> ', apiData)
+                return {fileName: fileName}
             }            
         } 
         else {

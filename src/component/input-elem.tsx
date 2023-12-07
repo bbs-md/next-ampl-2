@@ -2,6 +2,14 @@
 import React, {useState} from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { saveDataToS3, sendCvDataByGrapgQl } from '@/app/actions'
+import { Amplify } from 'aws-amplify';
+import config from '@/amplifyconfiguration.json';
+import { generateClient } from 'aws-amplify/api';
+import { myCustomMutation } from "@/graphql/mutations";
+
+Amplify.configure(config);
+const client = generateClient();
+
 
 export default function InputElem(props: any) {
     console.log('InputElem props >>>>', props)
@@ -25,6 +33,17 @@ export default function InputElem(props: any) {
             if (name) {
                 data.set('name', name?.toString())
             }
+
+            const apiData = await client.graphql({ query: myCustomMutation, variables: { 
+                cvData: {
+                  bucketName: "bucketName",
+                  objectKey: `public/fileName`,
+                  source: "alliedtesting.com",
+                  name: "cvData.name"
+                }
+              },
+              });
+            console.log('graphql apiData >>> ', apiData)
             
 
             const res = await fetch('/api/upload', {
