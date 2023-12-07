@@ -55,16 +55,16 @@ export async function POST(request: NextRequest) {
 
 
     return NextResponse.json( {success: true, body: {filePath: path}})
-
-     try {
-         const result = await uploadData({
-             key: file.name,
-             data: buffer,
-         }).result;
-         console.log('Succeeded uploadData: ', result);
-    } catch (error) {
-        console.log('uploadData Error : ', error);
-    }
+    // if 
+    //  try {
+    //      const result = await uploadData({
+    //          key: file?.name,
+    //          data: buffer,
+    //      }).result;
+    //      console.log('Succeeded uploadData: ', result);
+    // } catch (error) {
+    //     console.log('uploadData Error : ', error);
+    // }
 
     // try {
     //     const upload = s3.upload(params);
@@ -76,21 +76,21 @@ export async function POST(request: NextRequest) {
     //     await upload.promise();
     //     console.log(`s3 File uploaded successfully: ${file.name}`);
 
-         const apiData = await client.graphql({ query: myCustomMutation, variables: { 
-             cvData: {
-               bucketName: bucketName,
-               objectKey: `public/${file.name}`,
-               source: "alliedtesting.com",
-               name: name
-             }
-           }});
-         console.log('graphql apiData >>> ', apiData)
+        //  const apiData = await client.graphql({ query: myCustomMutation, variables: { 
+        //      cvData: {
+        //        bucketName: bucketName,
+        //        objectKey: `public/${file.name}`,
+        //        source: "alliedtesting.com",
+        //        name: name
+        //      }
+        //    }});
+        //  console.log('graphql apiData >>> ', apiData)
 
     // } catch (err) {
     //     console.error('s3 Failed to upload file to s3: ', err);
     // }
 
-    return NextResponse.json( {success: true})
+    // return NextResponse.json( {success: true})
 
 
 }
