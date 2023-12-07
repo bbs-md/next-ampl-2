@@ -50,7 +50,7 @@ export async function sendCvDataByGrapgQl(filePath: string, cvData: {[key:string
         }       
    } catch (error) {
        console.log('Failed to uploadData to s3: ', error);
-       message = String(error.message)
+       message = 'sendCvDataByGrapgQl Error';
    }
    return {message}
 }
