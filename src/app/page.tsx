@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import * as queries from '@/graphql/queries';
 import InputElem from '@/component/input-elem'
+import UploadForm from '@/component/upload-form'
 
 import config from '@/amplifyconfiguration.json';
 
@@ -54,7 +55,7 @@ export default async function Home() {
         margin: '0 auto',
         textAlign: 'center',
         marginTop: '100px',
-        height: '200px',
+        height: '500px',
       }}
     >
       {/* 3. Update the form's action to use the
@@ -64,6 +65,7 @@ export default async function Home() {
         {/* <input name="name" placeholder="Add a todo" />
         <button type="submit">Add</button> */}
         <InputElem tol={'tol'}>Input el</InputElem>
+        <UploadForm tol2={'tol2'}/>
       {/* </form> */}
     </div>
   );

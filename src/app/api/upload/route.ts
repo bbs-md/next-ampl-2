@@ -25,6 +25,7 @@ const client = generateClient();
 
 const bucketName = 'hr-ses-mail-received-tol';
 export async function POST(request: NextRequest) {
+    console.log('Start POST ', request)
     const data = await request.formData()
     const file: File | null = data.get('file') as unknown as File
     const name: string | null = data.get('name') as unknown as string

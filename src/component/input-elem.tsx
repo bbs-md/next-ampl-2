@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { saveDataToS3, sendCvDataByGrapgQl } from '@/app/actions'
 import { Amplify } from 'aws-amplify';
@@ -22,6 +22,10 @@ export default function InputElem(props: any) {
         const formData = new FormData(event.target as HTMLFormElement);
         let name = formData.get("name");
         console.log('Start name', name)
+        if (!name) {
+            setMessage('Fill the name filed')
+            return
+        }
         if (!file) {
             setMessage('Select the file')
             return
@@ -33,6 +37,7 @@ export default function InputElem(props: any) {
             if (name) {
                 data.set('name', name?.toString())
             }
+            
 
             // const apiData = await client.graphql({ query: myCustomMutation, variables: { 
             //     cvData: {

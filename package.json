@@ -11,10 +11,13 @@
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.0.6",
     "@aws-amplify/cli-extensibility-helper": "^3.0.23",
+    "antd": "^5.12.1",
     "aws-amplify": "^6.0.6",
+    "axios": "^1.6.2",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "untd": "^0.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",
